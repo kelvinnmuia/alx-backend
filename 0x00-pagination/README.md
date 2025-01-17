@@ -186,3 +186,125 @@ bob@dylan:~$
 ```
 
   * [2-hypermedia_pagination.py](./2-hypermedia_pagination.py)
+
+**3. Deletion-resilient hypermedia pagination**
+
+The goal here is that if between two queries, certain rows are removed from the dataset, the user does not miss items from dataset when changing page.
+
+Start `3-hypermedia_del_pagination.py` with this code:
+
+```
+#!/usr/bin/env python3
+"""
+Deletion-resilient hypermedia pagination
+"""
+
+import csv
+import math
+from typing import List
+
+
+class Server:
+    """Server class to paginate a database of popular baby names.
+    """
+    DATA_FILE = "Popular_Baby_Names.csv"
+
+    def __init__(self):
+        self.__dataset = None
+        self.__indexed_dataset = None
+
+    def dataset(self) -> List[List]:
+        """Cached dataset
+        """
+        if self.__dataset is None:
+            with open(self.DATA_FILE) as f:
+                reader = csv.reader(f)
+                dataset = [row for row in reader]
+            self.__dataset = dataset[1:]
+
+        return self.__dataset
+
+    def indexed_dataset(self) -> Dict[int, List]:
+        """Dataset indexed by sorting position, starting at 0
+        """
+        if self.__indexed_dataset is None:
+            dataset = self.dataset()
+            truncated_dataset = dataset[:1000]
+            self.__indexed_dataset = {
+                i: dataset[i] for i in range(len(dataset))
+            }
+        return self.__indexed_dataset
+
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+            pass
+```
+
+Implement a `get_hyper_index` method with two integer arguments: `index` with a `None` default value and `page_size` with default value of 10.
+
+  * The method should return a dictionary with the following key-value pairs:
+    * `index`: the current start index of the return page. That is the index of the first item in the current page. For example if requesting page 3 with `page_size` 20, and no data was removed from the dataset, the current index should be 60.
+    * `next_index`: the next index to query with. That should be the index of the first item after the last item on the current page.
+    * `page_size`: the current page size
+    * `data`: the actual page of the dataset
+
+**Requirements/Behavior**:
+
+  * Use `assert` to verify that `index` is in a valid range.
+  * If the user queries index 0, `page_size` 10, they will get rows indexed 0 to 9 included.
+  * If they request the next index (10) with `page_size` 10, but rows 3, 6 and 7 were deleted, the user should still receive rows indexed 10 to 19 included.
+
+```
+bob@dylan:~$ cat 3-main.py
+#!/usr/bin/env python3
+"""
+Main file
+"""
+
+Server = __import__('3-hypermedia_del_pagination').Server
+
+server = Server()
+
+server.indexed_dataset()
+
+try:
+    server.get_hyper_index(300000, 100)
+except AssertionError:
+    print("AssertionError raised when out of range")        
+
+
+index = 3
+page_size = 2
+
+print("Nb items: {}".format(len(server._Server__indexed_dataset)))
+
+# 1- request first index
+res = server.get_hyper_index(index, page_size)
+print(res)
+
+# 2- request next index
+print(server.get_hyper_index(res.get('next_index'), page_size))
+
+# 3- remove the first index
+del server._Server__indexed_dataset[res.get('index')]
+print("Nb items: {}".format(len(server._Server__indexed_dataset)))
+
+# 4- request again the initial index -> the first data retreives is not the same as the first request
+print(server.get_hyper_index(index, page_size))
+
+# 5- request again initial next index -> same data page as the request 2-
+print(server.get_hyper_index(res.get('next_index'), page_size))
+
+bob@dylan:~$ 
+bob@dylan:~$ ./3-main.py
+AssertionError raised when out of range
+Nb items: 19418
+{'index': 3, 'data': [['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Emma', '99', '4'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Emily', '99', '4']], 'page_size': 2, 'next_index': 5}
+{'index': 5, 'data': [['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Mia', '79', '5'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Charlotte', '59', '6']], 'page_size': 2, 'next_index': 7}
+Nb items: 19417
+{'index': 3, 'data': [['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Emily', '99', '4'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Mia', '79', '5']], 'page_size': 2, 'next_index': 6}
+{'index': 5, 'data': [['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Mia', '79', '5'], ['2016', 'FEMALE', 'ASIAN AND PACIFIC ISLANDER', 'Charlotte', '59', '6']], 'page_size': 2, 'next_index': 7}
+bob@dylan:~$ 
+```
+
+  * [3-hypermedia_del_pagination.py](./3-hypermedia_del_pagination.py)
+
