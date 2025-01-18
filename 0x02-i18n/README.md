@@ -128,8 +128,46 @@ In your HTML template, if a user is logged in, in a paragraph tag, display a wel
 | `logged_in_as`         | `"You are logged in as % (username)s."` | `"Vous êtes connecté en tant que %(username)s."` |
 | `not_logged_in`        | `"You are not logged in."`              | `"Vous n'êtes pas connecté."`                    |
 
+**Visiting** `http://127.0.0.1:5000/` **in your browser should display this:**
+
 ![alt text](./hellonl.png)
 
 **Visiting** `http://127.0.0.1:5000/?login_as=2` **in your browser should display this:**
 
 ![alt text](./helloln.png)
+
+  * [5-app.py](./5-app.py)
+  * [templates/5-index.html](./templates/5-index.html)
+
+**6. Use user locale**
+
+Change your get_locale function to use a user’s preferred local if it is supported.
+
+The order of priority should be
+
+    1. Locale from URL parameters
+    2. Locale from user settings
+    3. Locale from request header
+    4. Default locale
+
+Test by logging in as different users
+
+![alt text](./bonjourmd.png)
+
+  * [6-app.py](./6-app.py)
+  * [templates/6-index.html](./templates/6-index.html)
+
+**7. Infer appropriate time zone**
+
+Define a `get_timezone` function and use the `babel.timezoneselector` decorator.
+
+The logic should be the same as `get_locale`:
+
+    1. Find `timezone` parameter in URL parameters
+    2. Find time zone from user settings
+    3. Default to UTC
+
+Before returning a URL-provided or user time zone, you must validate that it is a valid time zone. To that, use `pytz.timezone` and catch the `pytz.exceptions.UnknownTimeZoneError` exception.
+
+  * [7-app.py](./7-app.py)
+  * [templates/7-index.html](./templates/7-index.html)
