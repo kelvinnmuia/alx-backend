@@ -64,9 +64,25 @@ $ pybabel init -i messages.pot -d translations -l en
 $ pybabel init -i messages.pot -d translations -l fr
 ```
 
-Then edit files translations/[en|fr]/LC_MESSAGES/messages.po to provide the correct value for each message ID for each language. Use the following translations:
+Then edit files `translations/[en|fr]/LC_MESSAGES/messages.po` to provide the correct value for each message ID for each language. Use the following translations:
 
 | **msgid**              | **English**              | **French**             |
 | :---------             | :----------              | :---------             |
 | `home_title`           | `"Welcome to ALX"`       | `"Bienvenue chez ALX"` |
 | `home_header`          | `"Hello world"`          | `"Bonjour monde!"`     |
+
+Then compile your dictionaries with
+
+```
+$ pybabel compile -d translations
+```
+
+Reload the home page of your app and make sure that the correct messages show up.
+
+  * [3-app.py](./3-app.py)
+  * [babel.cfg](./babel.cfg)
+  * [templates/3-index.html](./templates/3-index.html)
+  * [translations/en/LC_MESSAGES/messages.po](./translations/en/LC_MESSAGES/messages.po)
+  * [translations/fr/LC_MESSAGES/messages.po](./translations/fr/LC_MESSAGES/messages.po)
+  * [translations/en/LC_MESSAGES/messages.mo](./translations/en/LC_MESSAGES/messages.mo)
+  * [translations/fr/LC_MESSAGES/messages.mo](./translations/fr/LC_MESSAGES/messages.mo)
