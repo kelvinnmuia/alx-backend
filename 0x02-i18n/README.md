@@ -31,3 +31,10 @@ Use that class as config for your Flask app.
 
   * [1-app.py](./1-app.py)
   * [templates/1-index.html](./templates/1-index.html)
+
+**2. Get locale from request**
+
+Create a `get_locale` function with the `babel.localeselector` decorator. Use `request.accept_languages` to determine the best match with our supported languages.
+
+  * [2-app.py](./2-app.py)
+  * [templates/2-index.html](./templates/2-index.html)
