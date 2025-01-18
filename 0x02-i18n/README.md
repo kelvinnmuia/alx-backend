@@ -186,11 +186,11 @@ Use the following translations
 
 **Displaying the time in French looks like this:**
 
-![alt text](.bonjourmdc.png)
+![alt text](./bonjourmdc.png)
 
 **Displaying the time in English looks like this:**
 
-![alt text](./bonjourmds)
+![alt text](./bonjourmds.png)
 
   * [app.py](./app.py)
   * [templates/index.html](./templates/index.html)
