@@ -183,3 +183,22 @@ Use the following translations
 | **msgid**              | **English**                               | **French**                                       |
 | :---------             | :----------                               | :---------                                       |
 | `current_time_is`      | `"The current time is %(current_time)s."` | `"Nous sommes le %(current_time)s."`             |
+
+**Displaying the time in French looks like this:**
+
+![alt text](.bonjourmdc.png)
+
+**Displaying the time in English looks like this:**
+
+![alt text](./bonjourmds)
+
+  * [app.py](./app.py)
+  * [templates/index.html](./templates/index.html)
+  * [translations/en/LC_MESSAGES/messages.po](./translations/en/LC_MESSAGES/messages.po)
+  * [translations/fr/LC_MESSAGES/messages.po](./translations/fr/LC_MESSAGES/messages.po)
+
+## Additional Project Resources
+
+  * [Flask-Babel](https://web.archive.org/web/20201111174034/https://flask-babel.tkte.ch/)
+  * [Flask i18n tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-i18n-and-l10n)
+  * [pytz](https://pypi.org/project/pytz/)
