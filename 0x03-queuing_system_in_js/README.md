@@ -238,7 +238,7 @@ bob@dylan:~$
 
 In a file named `4-redis_advanced_op.js`, let’s use the client to store a hash value
 
-Create Hash:
+**Create Hash:**
 Using `hset`, let’s store the following:
 
   * The key of the hash should be `ALX`
