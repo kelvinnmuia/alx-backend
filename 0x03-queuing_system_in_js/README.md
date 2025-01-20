@@ -305,10 +305,23 @@ In a file named `5-publisher.js`, create a redis client:
 
   * On connect, it should log the message `Redis client connected to the server`
   * On error, it should log the message `Redis client not connected to the server: ERROR MESSAGE`
-  * Write a function named publishMessage:
-It will take two arguments: message (string), and time (integer - in ms)
-After time millisecond:
-The function should log to the console About to send MESSAGE
-The function should publish to the channel ALX channel, the message passed in argument after the time passed in arguments
-At the end of the file, call:
+  * Write a function named `publishMessage`:
+    * It will take two arguments: `message` (string), and `time` (integer - in ms)
+    * After `time` millisecond:
+      * The function should log to the console `About to send MESSAGE`
+      * The function should publish to the channel `ALX channel`, the message passed in argument after the time passed in arguments
+  * At the end of the file, call:
 
+```
+publishMessage("ALX Student #1 starts course", 100);
+publishMessage("ALX Student #2 starts course", 200);
+publishMessage("KILL_SERVER", 300);
+publishMessage("ALX Student #3 starts course", 400);
+```
+
+**Requirements:**
+
+  * You only need one Redis server to execute the program
+  * You will need to have two node processes to run each script at the same time
+
+**
