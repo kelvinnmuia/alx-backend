@@ -700,4 +700,37 @@ Notification job created: 51
 
   * [8-job.js](./8-job.js)
 
-**
+**11. Writing the test for job creation**
+
+Now that you created a job creator, let’s add tests:
+
+  * Import the function `createPushNotificationsJobs`
+  * Create a queue with `Kue`
+  * Write a test suite for the `createPushNotificationsJobs` function:
+    * Use `queue.testMode` to validate which jobs are inside the queue
+    * etc.
+
+**Requirements:**
+
+  * Make sure to enter the test mode without processing the jobs before executing the tests
+  * Make sure to clear the queue and exit the test mode after executing the tests
+
+```
+bob@dylan:~$ npm test 8-job.test.js 
+
+> queuing_system_in_js@1.0.0 test /root
+> mocha --require @babel/register --exit "8-job.test.js"
+
+
+
+  createPushNotificationsJobs
+    ✓ display a error message if jobs is not an array
+Notification job created: 1
+Notification job created: 2
+    ✓ create two new jobs to the queue
+...
+
+  123 passing (417ms)
+```
+
+  * [8-job.test.js](./8-job.test.js)
