@@ -734,3 +734,36 @@ Notification job created: 2
 ```
 
   * [8-job.test.js](./8-job.test.js)
+
+**12. In stock?**
+
+**Data**
+Create an array `listProducts` containing the list of the following products:
+
+  * Id: 1, name: `Suitcase 250`, price: 50, stock: 4
+  * Id: 2, name: `Suitcase 450`, price: 100, stock: 10
+  * Id: 3, name: `Suitcase 650`, price: 350, stock: 2
+  * Id: 4, name: `Suitcase 1050`, price: 550, stock: 5
+
+**Data access**
+
+Create a function named `getItemById`:
+
+  * It will take `id` as argument
+  * It will return the item from `listProducts` with the same id
+
+**Server**
+
+Create an `express` server listening on the port 1245. (You will start it via: `npm run dev 9-stock.js`)
+
+**Products**
+
+Create the route `GET /list_products` that will return the list of every available product with the following JSON format:
+
+```
+bob@dylan:~$ curl localhost:1245/list_products ; echo ""
+[{"itemId":1,"itemName":"Suitcase 250","price":50,"initialAvailableQuantity":4},{"itemId":2,"itemName":"Suitcase 450","price":100,"initialAvailableQuantity":10},{"itemId":3,"itemName":"Suitcase 650","price":350,"initialAvailableQuantity":2},{"itemId":4,"itemName":"Suitcase 1050","price":550,"initialAvailableQuantity":5}]
+bob@dylan:~$ 
+```
+
+**In stock in Redis**
