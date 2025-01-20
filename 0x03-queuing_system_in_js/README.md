@@ -290,3 +290,24 @@ bob@dylan:~$
 ```
 
   * [4-redis_advanced_op.js](./4-redis_advanced_op.js)
+
+**5. Node Redis client publisher and subscriber**
+
+In a file named `5-subscriber.js`, create a redis client:
+
+  * On connect, it should log the message `Redis client connected to the server`
+  * On error, it should log the message `Redis client not connected to the server: ERROR MESSAGE`
+  * It should subscribe to the channel `ALXchannel`
+When it receives message on the channel ALX channel, it should log the message to the console
+When the message is KILL_SERVER, it should unsubscribe and quit
+In a file named 5-publisher.js, create a redis client:
+
+On connect, it should log the message Redis client connected to the server
+On error, it should log the message Redis client not connected to the server: ERROR MESSAGE
+Write a function named publishMessage:
+It will take two arguments: message (string), and time (integer - in ms)
+After time millisecond:
+The function should log to the console About to send MESSAGE
+The function should publish to the channel ALX channel, the message passed in argument after the time passed in arguments
+At the end of the file, call:
+
