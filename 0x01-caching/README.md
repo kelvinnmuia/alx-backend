@@ -43,6 +43,8 @@ class BaseCaching():
         raise NotImplementedError("get must be implemented in your cache class")
 ```
 
+## Tasks :page_with_curl:
+
 **0. Basic dictionary**
 
 Create a class `BasicCache` that inherits from `BaseCaching` and is a caching system:
