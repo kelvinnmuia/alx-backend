@@ -3,6 +3,8 @@
 
 This project introduced me to implementing pagination in backend development, a crucial technique for managing and delivering large datasets efficiently. I learned how to design and implement pagination strategies, such as limit-offset and cursor-based pagination, to optimize API performance and enhance user experience.
 
+## Tasks :page_with_curl:
+
 **0. Simple helper function**
 
 Write a function named `index_range` that takes two integer arguments `page` and `page_size`.
