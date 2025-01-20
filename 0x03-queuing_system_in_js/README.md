@@ -1,4 +1,4 @@
-# 0x00. Pagination
+# 0x03. Queuing System in JS
 ## The Domains/Concepts covered in this project: `Back-end` `JavaScript` `ES6` `Redis` `NodeJS` `ExpressJS` `Kue`
 
 This project introduced me to implementing a queuing system using Kue, Express, Node.js, Redis, and JavaScript to manage and process tasks efficiently. I learned how to set up and configure task queues, handle job lifecycles, and leverage Redis for reliable and scalable asynchronous processing in backend applications.
