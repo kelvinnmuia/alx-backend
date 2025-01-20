@@ -418,3 +418,7 @@ If you execute multiple time this file, you will see the `JOB ID` increasing - i
 
   * [6-job_creator.js](./6-job_creator.js)
 
+**7. Create the Job processor**
+
+
+
