@@ -435,6 +435,22 @@ In a file named `6-job_processor.js`:
   * You will need to have two node processes to run each script at the same time
   * You muse use `Kue` to set up the queue
 
-**
+**Terminal 2:**
+
+```
+bob@dylan:~$ npm run dev 6-job_processor.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "6-job_processor.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 6-job_processor.js`
+Sending notification to 4153518780, with message: This is the code to verify your account
+```
+
+
 
 
