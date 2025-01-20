@@ -324,4 +324,56 @@ publishMessage("ALX Student #3 starts course", 400);
   * You only need one Redis server to execute the program
   * You will need to have two node processes to run each script at the same time
 
-**
+**Terminal 1:**
+
+```
+bob@dylan:~$ npm run dev 5-subscriber.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "5-subscriber.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 5-subscriber.js`
+Redis client connected to the server
+```
+
+**Terminal 2:**
+
+```
+bob@dylan:~$ npm run dev 5-publisher.js 
+
+> queuing_system_in_js@1.0.0 dev /root
+> nodemon --exec babel-node --presets @babel/preset-env "5-publisher.js"
+
+[nodemon] 2.0.4
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `babel-node --presets @babel/preset-env 5-publisher.js`
+Redis client connected to the server
+About to send ALX Student #1 starts course
+About to send ALX Student #2 starts course
+About to send KILL_SERVER
+About to send ALX Student #3 starts course
+^C
+bob@dylan:~$ 
+```
+
+**And in the same time in Terminal 1:**
+
+```
+Redis client connected to the server
+ALX Student #1 starts course
+ALX Student #2 starts course
+KILL_SERVER
+[nodemon] clean exit - waiting for changes before restart
+^C
+bob@dylan:~$ 
+```
+
+Now you have a basic Redis-based queuing system where you have a process to generate job and a second one to process it. These 2 processes can be in 2 different servers, which we also call “background workers”.
+
+  * [5-subscriber.js](./5-subscriber.js)
